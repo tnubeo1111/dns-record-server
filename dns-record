@@ -1,0 +1,38 @@
+- DNS là gì ?
+  DNS là viết tắt của cụm từ Domain Name System, mang ý nghĩa đầy đủ là hệ thống phân giải tên miền.
+  Hiểu một cách ngắn gọn nhất, DNS cơ bản là một hệ thống chuyển đổi các tên miền website mà chúng ta đang sử dụng,
+  ở dạng www.tenmien.com sang một địa chỉ IP dạng số tương ứng với tên miền đó và ngược lại.
+  
+- Chức năng của DNS là gì?
+  Về chức năng, DNS có thể được hiểu như một “người phiên dịch” và “truyền đạt thông tin”. 
+  DNS sẽ làm công việc dịch tên miền thành một địa chỉ IP gồm 4 nhóm số khác nhau.
+  Ví dụ như www.tenmien.com thành 421.64.874.899 hoặc ngược lại dịch một địa chỉ IP thành tên miền.
+
+- Các loại bản ghi DNS:
+  1. Record A:
+    Là một record căn bản và quan trọng, dùng để ánh xạ từ một domain thành địa chỉ IP cho phép có thể truy cập website. 
+    Đây là chức năng cốt lõi của hệ thống DNS. Record A có dạng như sau:
+        example.com   A    123.30.108.142
+    Mọi người cũng có thể tạo bản ghi A cho subdomain muốn truy cập đến hosting – VPS – Server.
+        sub.example.com   A   123.30.108.142
+    Mọi người cũng có thể trỏ subdomain khác nhau đến những IP khác nhau.
+        sub1.example.com   A   123.30.108.150
+        
+  2. Record CNAME (Canonical Name):
+    Cho phép tên miền có nhiều bí danh khác nhau, khi truy cập các bí danh sẽ cũng về một địa chỉ tên miền. Để sử dụng bản ghi CNAME cần khai báo bản ghi A trước.
+        www   CNAME   example.com
+
+        mail CNAME example.com
+
+        example.com   A   123.30.108.142
+
+     Khi một yêu cầu đến địa chỉ alias.com thì DNS sẽ tìm đến  example thông qua bản ghi CNAME,
+     một DNS mới sẽ tiếp tục tìm đến địa chỉ IP: 123.30.108.142 thông qua bản ghi A.
+     
+  3. Record DKIM
+    Là bản ghi dùng để xác thực người gửi bằng cách mã hóa một phần email gửi bằng một chuỗi ký tự, xem như là chữ ký.
+    Khi email được gửi đi máy chủ mail sẻ kiểm so sánh với thông tin bản ghi đã được cấu hình trong DNS để xác nhận. Bản ghi DKIM có dạng:
+        mail._domainkey.123host.vn     TXT  k=rsa;p=MIIBIjANBgkqhkiG9w0BA
+        
+  ...
+      
